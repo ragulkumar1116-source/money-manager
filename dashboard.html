@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Money Manager Pro v3.5 - Dashboard</title>
+  <title>Money Manager Pro v3.5 - Dashboard Node</title>
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Progressive PWA Installation Auto-Connector Profile -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Core Enterprise Third-Party CDNs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
@@ -15,12 +20,14 @@
 </head>
 <body>
   <div class="app-layout">
+    
+    <!-- Top System Dynamic Greeting Header Bar -->
     <header class="glass-header">
       <div class="user-profile-summary">
         <span class="avatar-icon">👑</span>
         <div>
-          <h4 id="user-display-name">Loading Profile...</h4>
-          <small id="system-date-lbl"></small>
+          <h4 id="user-display-name" style="font-weight: 700; letter-spacing: 0.3px;">Welcome, User</h4>
+          <small id="system-date-lbl" style="color: var(--text-muted); font-size: 11px;"></small>
         </div>
       </div>
       <div class="alert-center-badge" id="global-alert-trigger" onclick="toggleAlertModal()">
@@ -28,8 +35,10 @@
       </div>
     </header>
 
+    <!-- Main Workspace Core Viewport -->
     <main class="main-scroll-view">
       
+      <!-- Metrics Panels Matrix Array -->
       <section class="metrics-scroller">
         <div class="metric-card balance">
           <small>Current Net Worth</small>
@@ -52,50 +61,52 @@
         </div>
       </section>
 
-      <div class="view-tabs">
-        <button class="tab-link active" onclick="switchView('view-analytics')">Analytics</button>
-        <button class="tab-link" onclick="switchView('view-calendar')">Interactive Calendar</button>
-        <button class="tab-link" onclick="switchView('view-ledger')">Ledger Logs</button>
+      <!-- App Internal Navigation Interface Tabs -->
+      <div class="view-tabs" style="display: flex; gap: 10px; margin-bottom: 24px;">
+        <button class="btn-secondary tab-link active" onclick="switchView('view-analytics')">Analytics</button>
+        <button class="btn-secondary tab-link" onclick="switchView('view-calendar')">Interactive Calendar</button>
+        <button class="btn-secondary tab-link" onclick="switchView('view-ledger')">Ledger Logs</button>
       </div>
 
+      <!-- Tab Panel: Business Intelligence & Data Analytics -->
       <div id="view-analytics" class="tab-panel active">
-        <div class="glass-card widget-box">
-          <h3>Budget Allocations</h3>
-          <div id="budget-widget-list" class="progress-stack">
-            </div>
+        <div class="glass-card widget-box" style="margin-bottom: 24px;">
+          <h3>Budget Allocations Matrix</h3>
+          <div id="budget-widget-list" class="progress-stack" style="margin-top: 15px;"></div>
         </div>
 
-        <div class="chart-flexbox">
-          <div class="glass-card chart-container">
+        <div class="chart-flexbox" style="display: flex; flex-wrap: wrap; gap: 20px;">
+          <div class="glass-card chart-container" style="flex: 1; min-width: 300px;">
             <h3>Income vs Outflow Trend</h3>
             <canvas id="chart-income-expense"></canvas>
           </div>
-          <div class="glass-card chart-container">
+          <div class="glass-card chart-container" style="flex: 1; min-width: 300px;">
             <h3>Outflow Categories Breakdown</h3>
             <canvas id="chart-categories-pie"></canvas>
           </div>
         </div>
       </div>
 
-      <div id="view-calendar" class="tab-panel">
+      <!-- Tab Panel: Live Interactive Calendar Core Matrix -->
+      <div id="view-calendar" class="tab-panel" style="display:none;">
         <div class="glass-card calendar-card">
           <div class="calendar-controls">
-            <button onclick="shiftCalendarMonth(-1)">◀</button>
+            <button class="btn-secondary" style="padding: 6px 12px;" onclick="shiftCalendarMonth(-1)">◀</button>
             <h3 id="calendar-month-year">June 2026</h3>
-            <button onclick="shiftCalendarMonth(1)">▶</button>
+            <button class="btn-secondary" style="padding: 6px 12px;" onclick="shiftCalendarMonth(1)">▶</button>
           </div>
-          <div class="calendar-weekdays">
+          <div class="calendar-weekdays" style="margin-top: 15px;">
             <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
           </div>
-          <div class="calendar-days-grid" id="calendar-days-container">
-            </div>
+          <div class="calendar-days-grid" id="calendar-days-container"></div>
         </div>
       </div>
 
-      <div id="view-ledger" class="tab-panel">
-        <div class="glass-card filter-card">
-          <div class="filter-search-row">
-            <input type="text" id="ledger-search-box" placeholder="Search by text, category, note..." oninput="evaluateLedgerDataView()">
+      <!-- Tab Panel: Dynamic Financial Ledger Logs Spreadsheet System -->
+      <div id="view-ledger" class="tab-panel" style="display:none;">
+        <div class="glass-card filter-card" style="margin-bottom: 24px;">
+          <div class="filter-search-row" style="display: flex; gap: 12px; margin-bottom: 12px;">
+            <input type="text" id="ledger-search-box" style="flex:1;" placeholder="Search by text, custom category, note..." oninput="evaluateLedgerDataView()">
             <select id="ledger-time-filter" onchange="evaluateLedgerDataView()">
               <option value="all">Lifetime Records</option>
               <option value="today">Today</option>
@@ -107,44 +118,54 @@
               <option value="custom">Custom Range</option>
             </select>
           </div>
-          <div class="filter-search-row custom-date-row" id="custom-date-row" style="display:none;">
+          <div class="filter-search-row custom-date-row" id="custom-date-row" style="display:none; gap: 10px; margin-bottom:12px;">
             <input type="date" id="filter-start-date" onchange="evaluateLedgerDataView()">
             <input type="date" id="filter-end-date" onchange="evaluateLedgerDataView()">
           </div>
-          <div class="export-actions">
-            <button onclick="exportDataSuite('xlsx')">Export Excel</button>
-            <button onclick="exportDataSuite('pdf')">Export PDF</button>
+          <div class="export-actions" style="display: flex; gap: 10px;">
+            <button class="btn-secondary" style="flex:1;" onclick="exportDataSuite('xlsx')">Export Excel (.xlsx)</button>
+            <button class="btn-secondary" style="flex:1;" onclick="exportDataSuite('pdf')">Export PDF Report</button>
           </div>
         </div>
 
         <div class="glass-card list-card">
-          <h3>Transaction History</h3>
-          <div class="ledger-stream-box" id="ledger-stream-target">
-            </div>
+          <h3>Transaction History Stream</h3>
+          <div class="ledger-stream-box" id="ledger-stream-target" style="margin-top: 15px;"></div>
         </div>
       </div>
 
+      <!-- Enterprise Corporate Ownership Footprint Stamp Label -->
+      <footer class="corporate-licensing-footer">
+        POWERED BY <strong>VISH INFOTECH SYSTEMS</strong> SOFTWARE DIVISION<br>
+        LICENSED UNDER COMPLIANCE MATRIX REF: LIC-2026-VISH-091<br>
+        REGULATED ARCHITECTURE PROPERTY TRADEMARK V3.5 • ALL RIGHTS RESERVED
+      </footer>
+
     </main>
 
-    <div class="fab-trigger-action" onclick="openTransactionModal()">+</div>
+    <!-- Native Action Floating Interface Module Entry Trigger Pin -->
+    <div class="fab-trigger-action" style="position: fixed; bottom: 95px; right: 24px; width: 56px; height: 56px; background: var(--accent-gradient); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: var(--card-shadow); z-index: 850;" onclick="openTransactionModal()">+</div>
 
+    <!-- PWA Bottom Mobile Application Operational Navigation Base Dock -->
     <nav class="bottom-dock-nav">
-      <div class="dock-item active" onclick="location.reload()">Dashboard</div>
-      <div class="dock-item" onclick="switchView('view-calendar')">Calendar</div>
-      <div class="dock-item" onclick="switchView('view-ledger')">Ledger</div>
-      <div class="dock-item" onclick="window.location.href='settings.html'">Settings</div>
+      <div class="dock-item active" onclick="location.reload()">📊 Dashboard</div>
+      <div class="dock-item" onclick="switchView('view-calendar')">📅 Calendar</div>
+      <div class="dock-item" onclick="switchView('view-ledger')">📑 Ledger</div>
+      <div class="dock-item" onclick="window.location.href='settings.html'">⚙️ Settings</div>
     </nav>
   </div>
 
-  <div class="modal-overlay" id="tx-modal">
-    <div class="glass-card modal-window">
-      <div class="modal-header">
-        <h3 id="tx-modal-title">New Entry Input</h3>
-        <span class="close-btn" onclick="closeTransactionModal()">×</span>
+  <!-- Modal Interface: Master Financial Node Data Capture Engine -->
+  <div class="modal-overlay" id="tx-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000;">
+    <div class="glass-card modal-window" style="width: 90%; max-width: 480px; max-height: 85vh; overflow-y: auto;">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 id="tx-modal-title">New Entry Input Field</h3>
+        <span class="close-btn" style="cursor: pointer; font-size: 24px;" onclick="closeTransactionModal()">×</span>
       </div>
+      
       <div class="modal-body">
         <div class="input-wrapper">
-          <label>Entry Engine Target</label>
+          <label>Entry Engine Target Architecture</label>
           <select id="form-entry-type" onchange="adjustFormFields()">
             <option value="transaction">Income / Expense Record</option>
             <option value="salary">Salary Component Record</option>
@@ -153,6 +174,7 @@
           </select>
         </div>
 
+        <!-- Segment Section: Standard Financial Flows -->
         <div id="context-transaction">
           <div class="input-wrapper">
             <label>Financial Flow Vector</label>
@@ -165,22 +187,28 @@
             <label>Amount (₹)</label>
             <input type="number" step="0.01" id="tx-amount">
           </div>
+          
+          <!-- HYBRID DATA COGNITION COMBO-BOX (Selection list + manual string inputs compatibility) -->
           <div class="input-wrapper">
             <label>Classification Category</label>
-            <select id="tx-category">
-              <option value="Food">Food & Provisions</option>
-              <option value="Transport">Transport & Logistics</option>
-              <option value="Petrol">Petrol / Fuel Assets</option>
-              <option value="Shopping">Shopping & Lifestyle</option>
-              <option value="Rent">Property Rent / Lease</option>
-              <option value="Bills">Utility Invoices & Bills</option>
-              <option value="Entertainment">Entertainment / Media</option>
-              <option value="EMI">EMI Financial Obligations</option>
-              <option value="Freelance">Freelance Compensation</option>
-              <option value="Business">Business Revenue Inflow</option>
-              <option value="Other">Other Miscellaneous Flows</option>
-            </select>
+            <input type="text" id="tx-category" list="category-datalist-presets" placeholder="Select or type custom element (e.g., Sugar)">
+            <datalist id="category-datalist-presets">
+              <option value="Food & Provisions"></option>
+              <option value="Transport & Logistics"></option>
+              <option value="Petrol / Fuel Assets"></option>
+              <option value="Shopping & Lifestyle"></option>
+              <option value="Property Rent / Lease"></option>
+              <option value="Utility Invoices & Bills"></option>
+              <option value="Entertainment / Media"></option>
+              <option value="EMI Financial Obligations"></option>
+              <option value="Freelance Compensation"></option>
+              <option value="Business Revenue Inflow"></option>
+              <option value="Sugar"></option>
+              <option value="Office Supplies"></option>
+              <option value="Other Miscellaneous Flows"></option>
+            </datalist>
           </div>
+          
           <div class="input-wrapper">
             <label>Settlement Vector (Method)</label>
             <select id="tx-method">
@@ -198,14 +226,15 @@
           </div>
         </div>
 
+        <!-- Segment Section: Salary Components Architecture -->
         <div id="context-salary" style="display:none;">
           <div class="input-wrapper">
             <label>Base Gross Amount (₹)</label>
             <input type="number" step="0.01" id="sal-amount">
           </div>
           <div class="input-wrapper">
-            <label>Employer / Entity Name</label>
-            <input type="text" id="sal-employer" placeholder="Enterprise Corp">
+            <label>Employer / Corporate Entity Name</label>
+            <input type="text" id="sal-employer" placeholder="Vish Infotech Systems">
           </div>
           <div class="input-wrapper">
             <label>Bonus Inflow Allocations (₹)</label>
@@ -213,79 +242,90 @@
           </div>
         </div>
 
+        <!-- Segment Section: System Notifications Logs & Diaries -->
         <div id="context-daynote" style="display:none;">
           <div class="input-wrapper">
-            <label>Personal Diary / Activity Logs</label>
+            <label>Personal Diary / Corporate Operational Activity Logs</label>
             <textarea id="note-personal-text" rows="2"></textarea>
           </div>
           <div class="input-wrapper">
             <label>Crucial Action Item Reminder Note</label>
-            <input type="text" id="note-reminder-text" placeholder="Pay premium before 12:00">
+            <input type="text" id="note-reminder-text" placeholder="Complete compliance audit check before 16:00">
           </div>
           <div class="input-wrapper">
             <label>Calendar Node Color Code Flag</label>
             <select id="note-color-tag">
-              <option value="yellow">Yellow Flag Reminder</option>
-              <option value="purple">Purple Flag Personal Diary</option>
+              <option value="yellow">Yellow Flag Action Warning</option>
+              <option value="purple">Purple Flag Personal Diary Entry</option>
             </select>
           </div>
         </div>
- <!-- UPGRADED: Classification Category Combo Box Engine with Manual Input Override -->
-          <div class="input-wrapper">
-            <label>Classification Category</label>
-            <input type="text" id="tx-category" list="category-datalist-presets" placeholder="Select or type custom category...">
-            <datalist id="category-datalist-presets">
-              <option value="Food & Provisions"></option>
-              <option value="Transport & Logistics"></option>
-              <option value="Petrol / Fuel Assets"></option>
-              <option value="Shopping & Lifestyle"></option>
-              <option value="Property Rent / Lease"></option>
-              <option value="Utility Invoices & Bills"></option>
-              <option value="Entertainment / Media"></option>
-              <option value="EMI Financial Obligations"></option>
-              <option value="Freelance Compensation"></option>
-              <option value="Business Revenue Inflow"></option>
-              <option value="Sugar"></option>
-              <option value="Office Supplies"></option>
-              <option value="Other Miscellaneous Flows"></option>
-            </datalist>
-          </div>
 
+        <!-- Segment Section: Budget Controls Engineering -->
+        <div id="context-budget" style="display:none;">
+          <div class="input-wrapper">
+            <label>Target Category Budget Key</label>
+            <input type="text" id="budget-category-key" list="category-datalist-presets" placeholder="Select or type target validation category...">
+          </div>
           <div class="input-wrapper">
             <label>Max Ceiling Limit Threshold (₹)</label>
             <input type="number" id="budget-threshold-limit">
           </div>
         </div>
 
+        <!-- Base Structural Properties Meta Parameters Groups -->
         <div class="input-wrapper" id="universal-date-time-group">
           <label>Target Timestamp Execution Anchor</label>
           <div style="display:flex; gap:10px;">
-            <input type="date" id="form-target-date">
-            <input type="time" id="form-target-time">
+            <input type="date" id="form-target-date" style="flex:1;">
+            <input type="time" id="form-target-time" style="flex:1;">
           </div>
         </div>
         <div class="input-wrapper" id="universal-memo-group">
           <label>Contextual Explanatory Memo Reference</label>
-          <input type="text" id="form-universal-memo" placeholder="Operational comments metadata">
+          <input type="text" id="form-universal-memo" placeholder="Operational comments metadata notes...">
         </div>
 
-        <button class="btn-primary" id="btn-modal-save-action" onclick="commitModalEntryToFirebase()">Commit Record Structure</button>
-        <button class="btn-secondary" id="btn-modal-delete-action" style="display:none; background:#ff4d4d; margin-top:10px;" onclick="deleteActiveRecord()">Delete Entry Permanently</button>
+        <button class="btn-primary" style="width: 100%; margin-top: 10px;" id="btn-modal-save-action" onclick="commitModalEntryToFirebase()">Commit Record Structure</button>
+        <button class="btn-primary" id="btn-modal-delete-action" style="display:none; background:linear-gradient(135deg, #ef4444 0%, #dc2626 100%); margin-top:10px; width:100%; box-shadow:none;" onclick="deleteActiveRecord()">Delete Entry Permanently</button>
       </div>
     </div>
   </div>
 
-  <div class="modal-overlay" id="alert-modal">
-    <div class="glass-card modal-window">
-      <div class="modal-header">
+  <!-- Modal Interface: Global Threshold Alerts Pipeline Stream -->
+  <div class="modal-overlay" id="alert-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000;">
+    <div class="glass-card modal-window" style="width: 90%; max-width: 440px;">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h3>System Threshold Alerts & Reminders</h3>
-        <span class="close-btn" onclick="toggleAlertModal()">×</span>
+        <span class="close-btn" style="cursor: pointer; font-size: 24px;" onclick="toggleAlertModal()">×</span>
       </div>
-      <div class="modal-body" id="alert-modal-stream-body">
-        </div>
+      <div class="modal-body" id="alert-modal-stream-body"></div>
     </div>
   </div>
 
+  <!-- Live Embedded Script Module Configurations Injection Linkages -->
   <script src="app.js"></script>
+  
+  <script>
+    // Progressive Web App Subsystem Automation Registration Routine Hook
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('Vish Infotech PWA Pipeline Layer Connected: Operational'))
+          .catch(err => console.error('PWA Core Registry Refused: ', err));
+      });
+    }
+
+    let mobileAppInstallationInterceptorEvent;
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      mobileAppInstallationInterceptorEvent = event;
+      console.log('Chromium Native Mobile Installer Prompt Hook Intercepted and Primed.');
+      
+      // Auto-trigger the installation popup if accessed from an uninstalled browser session:
+      // mobileAppInstallationInterceptorEvent.prompt();
+    });
+  </script>
 </body>
-</html>
+  </html>
+  
