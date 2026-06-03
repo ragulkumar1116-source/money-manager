@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="auto">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Money Manager Pro v3.5 - Authentication</title>
+  <title>Money Manager Pro v3.5 - Corporate Gateway</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
@@ -12,46 +12,29 @@
 <body class="auth-body">
   <div class="glass-card auth-card">
     <div class="auth-header">
+      <div class="brand-badge">💼</div>
       <h2>Money Manager Pro</h2>
-      <p id="auth-subtitle">Sign in to manage your premium asset logs</p>
+      <p id="auth-subtitle">Sign in to access your secure financial logs</p>
     </div>
 
     <div id="login-form-group">
       <div class="input-wrapper">
         <label>Email Address</label>
-        <input type="email" id="auth-email" placeholder="name@domain.com">
+        <input type="email" id="auth-email" placeholder="name@domain.com" required>
       </div>
       <div class="input-wrapper">
         <label>Password</label>
-        <input type="password" id="auth-password" placeholder="••••••••">
+        <input type="password" id="auth-password" placeholder="••••••••" required>
       </div>
-      <button class="btn-primary" id="btn-login">Secure Login</button>
+      <button class="btn-primary" id="btn-login" style="width: 100%;">Secure Login</button>
+      
       <div class="auth-actions">
-        <span onclick="toggleAuthMode('register')">Create Premium Account</span>
-        <span onclick="forgotPassword()">Forgot Password?</span>
-      </div>
-    </div>
-
-    <div id="register-form-group" style="display:none;">
-      <div class="input-wrapper">
-        <label>Full Name</label>
-        <input type="text" id="reg-name" placeholder="Alex Mercer">
-      </div>
-      <div class="input-wrapper">
-        <label>Email Address</label>
-        <input type="email" id="reg-email" placeholder="name@domain.com">
-      </div>
-      <div class="input-wrapper">
-        <label>Password</label>
-        <input type="password" id="reg-password" placeholder="Minimum 6 characters">
-      </div>
-      <button class="btn-primary" id="btn-register">Register System Identity</button>
-      <div class="auth-actions">
-        <span onclick="toggleAuthMode('login')">Back to Login Gateway</span>
+        <a href="newregistration.html" class="auth-link">Create Account</a>
+        <a href="forgot.html" class="auth-link">Forgot Password?</a>
       </div>
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app1.js"></script>
 </body>
 </html>
