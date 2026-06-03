@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Manager Pro v3.5 - Reset Gateway</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body class="auth-body">
+
+  <div class="glass-card auth-card">
+    <div class="auth-header">
+      <div class="brand-badge">🛡️</div>
+      <h2>Reset Password</h2>
+      <p>Enter your email below to dispatch a cloud recovery link</p>
+    </div>
+
+    <div id="forgot-form-group">
+      <div class="input-wrapper">
+        <label>Account Email Address</label>
+        <input type="email" id="forgot-email" placeholder="name@domain.com" required>
+      </div>
+      
+      <button class="btn-primary" id="btn-reset-password" style="width: 100%;">Send Recovery Link</button>
+      
+      <div class="auth-actions" style="justify-content: center;">
+        <a href="index.html" class="auth-link">Back to Secure Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app1.js"></script>
+</body>
+</html>

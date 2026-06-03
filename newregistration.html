@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Manager Pro v3.5 - Setup Account</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body class="auth-body">
+
+  <div class="glass-card auth-card">
+    <div class="auth-header">
+      <div class="brand-badge">🔑</div>
+      <h2>Create Account</h2>
+      <p>Set up your unique profile identity metrics</p>
+    </div>
+
+    <div id="register-form-group">
+      <div class="input-wrapper">
+        <label>Full Name</label>
+        <input type="text" id="reg-name" placeholder="John Doe" required>
+      </div>
+      <div class="input-wrapper">
+        <label>Email Address</label>
+        <input type="email" id="reg-email" placeholder="john@example.com" required>
+      </div>
+      <div class="input-wrapper">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="•••••••• (Min 6 Characters)" required>
+      </div>
+      
+      <button class="btn-primary" id="btn-register" style="width: 100%;">Initialize Account</button>
+      
+      <div class="auth-actions" style="justify-content: center;">
+        <a href="index.html" class="auth-link">Back to Secure Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app1.js"></script>
+</body>
+</html>
