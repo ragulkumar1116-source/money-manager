@@ -230,22 +230,27 @@
             </select>
           </div>
         </div>
-
-        <div id="context-budget" style="display:none;">
+ <!-- UPGRADED: Classification Category Combo Box Engine with Manual Input Override -->
           <div class="input-wrapper">
-            <label>Target Category Budget Key</label>
-            <select id="budget-category-key">
-              <option value="Food">Food & Provisions</option>
-              <option value="Transport">Transport & Logistics</option>
-              <option value="Petrol">Petrol / Fuel Assets</option>
-              <option value="Shopping">Shopping & Lifestyle</option>
-              <option value="Rent">Property Rent / Lease</option>
-              <option value="Bills">Utility Invoices & Bills</option>
-              <option value="Entertainment">Entertainment / Media</option>
-              <option value="EMI">EMI Financial Obligations</option>
-              <option value="Other">Other Miscellaneous Flows</option>
-            </select>
+            <label>Classification Category</label>
+            <input type="text" id="tx-category" list="category-datalist-presets" placeholder="Select or type custom category...">
+            <datalist id="category-datalist-presets">
+              <option value="Food & Provisions"></option>
+              <option value="Transport & Logistics"></option>
+              <option value="Petrol / Fuel Assets"></option>
+              <option value="Shopping & Lifestyle"></option>
+              <option value="Property Rent / Lease"></option>
+              <option value="Utility Invoices & Bills"></option>
+              <option value="Entertainment / Media"></option>
+              <option value="EMI Financial Obligations"></option>
+              <option value="Freelance Compensation"></option>
+              <option value="Business Revenue Inflow"></option>
+              <option value="Sugar"></option>
+              <option value="Office Supplies"></option>
+              <option value="Other Miscellaneous Flows"></option>
+            </datalist>
           </div>
+
           <div class="input-wrapper">
             <label>Max Ceiling Limit Threshold (₹)</label>
             <input type="number" id="budget-threshold-limit">
