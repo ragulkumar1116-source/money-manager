@@ -14,16 +14,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+
   <div class="app-layout">
-    <header class="glass-header">
-      <div class="user-profile-summary">
+    <header class="glass-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+      <div class="user-profile-summary" style="display: flex; align-items: center; gap: 12px; width: 100%;">
         <span class="avatar-icon">👑</span>
         <div>
-          <h4 id="user-display-name">Loading Profile...</h4>
+          <h4 id="user-display-name" style="margin: 0;">Loading Profile...</h4>
           <small id="system-date-lbl"></small>
         </div>
+        
+        <button class="btn-logout-gateway" onclick="executeSignOutGateway()" style="
+          background: rgba(239, 68, 68, 0.1);
+          color: #ef4444;
+          border: 1px solid rgba(239, 68, 68, 0.2);
+          padding: 8px 16px;
+          font-size: 13px;
+          font-weight: 600;
+          border-radius: 118px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          transition: all 0.2s ease;
+          margin-left: auto; 
+        ">
+          <span>🚪</span> Logout
+        </button>
       </div>
-      <div class="alert-center-badge" id="global-alert-trigger" onclick="toggleAlertModal()">
+      <div class="alert-center-badge" id="global-alert-trigger" onclick="toggleAlertModal()" style="margin-left: 15px;">
         🔔 <span class="badge-count" id="alert-counter">0</span>
       </div>
     </header>
@@ -61,8 +80,7 @@
       <div id="view-analytics" class="tab-panel active">
         <div class="glass-card widget-box">
           <h3>Budget Allocations</h3>
-          <div id="budget-widget-list" class="progress-stack">
-            </div>
+          <div id="budget-widget-list" class="progress-stack"></div>
         </div>
 
         <div class="chart-flexbox">
@@ -87,8 +105,7 @@
           <div class="calendar-weekdays">
             <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
           </div>
-          <div class="calendar-days-grid" id="calendar-days-container">
-            </div>
+          <div class="calendar-days-grid" id="calendar-days-container"></div>
         </div>
       </div>
 
@@ -119,8 +136,7 @@
 
         <div class="glass-card list-card">
           <h3>Transaction History</h3>
-          <div class="ledger-stream-box" id="ledger-stream-target">
-            </div>
+          <div class="ledger-stream-box" id="ledger-stream-target"></div>
         </div>
       </div>
 
@@ -166,8 +182,6 @@
             <input type="number" step="0.01" id="tx-amount">
           </div>
           <div class="input-wrapper">
-             <!-- UPGRADED: Classification Category Combo Box Engine with Manual Input Override -->
-          <div class="input-wrapper">
             <label>Classification Category</label>
             <input type="text" id="tx-category" list="category-datalist-presets" placeholder="Select or type custom category...">
             <datalist id="category-datalist-presets">
@@ -186,7 +200,6 @@
               <option value="Other Miscellaneous Flows"></option>
             </datalist>
           </div>
-
           <div class="input-wrapper">
             <label>Settlement Vector (Method)</label>
             <select id="tx-method">
@@ -282,8 +295,7 @@
         <h3>System Threshold Alerts & Reminders</h3>
         <span class="close-btn" onclick="toggleAlertModal()">×</span>
       </div>
-      <div class="modal-body" id="alert-modal-stream-body">
-        </div>
+      <div class="modal-body" id="alert-modal-stream-body"></div>
     </div>
   </div>
 
