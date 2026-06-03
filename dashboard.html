@@ -16,35 +16,43 @@
 <body>
 
   <div class="app-layout">
-    <header class="glass-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-      <div class="user-profile-summary" style="display: flex; align-items: center; gap: 12px; width: 100%;">
+    <header class="glass-header">
+      <div class="user-profile-summary">
         <span class="avatar-icon">👑</span>
+       
         <div>
-          <h4 id="user-display-name" style="margin: 0;">Loading Profile...</h4>
+          <h4 id="user-display-name">Loading Profile...</h4>
           <small id="system-date-lbl"></small>
         </div>
+      </div>
+      
+      <div class="alert-center-badge" id="global-alert-trigger" onclick="toggleAlertModal()">
+        <header style="display:flex; align-items:center;">
+  
+
+  <div style="margin-left:auto;">
+    <button class="btn-logout-gateway" onclick="executeSignOutGateway()" style="
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      margin-left: auto;
+    ">
+      <span>🚪</span> Logout
+    </button>
+  </div>
+        🔔 <span class="badge-count" id="alert-counter">0</span> 
         
-        <button class="btn-logout-gateway" onclick="executeSignOutGateway()" style="
-          background: rgba(239, 68, 68, 0.1);
-          color: #ef4444;
-          border: 1px solid rgba(239, 68, 68, 0.2);
-          padding: 8px 16px;
-          font-size: 13px;
-          font-weight: 600;
-          border-radius: 118px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          transition: all 0.2s ease;
-          margin-left: auto; 
-        ">
-          <span>🚪</span> Logout
-        </button>
       </div>
-      <div class="alert-center-badge" id="global-alert-trigger" onclick="toggleAlertModal()" style="margin-left: 15px;">
-        🔔 <span class="badge-count" id="alert-counter">0</span>
-      </div>
+      
     </header>
 
     <main class="main-scroll-view">
