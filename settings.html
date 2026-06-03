@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Manager Pro v3.5 - Profile System Settings</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    
+    <header class="glass-header">
+      <h2>System Security & Identity Options</h2>
+    </header>
+
+    <main class="main-scroll-view">
+      
+      <div class="glass-card profile-viewme-card">
+        <div class="profile-avatar-big">👤</div>
+        <h3 id="viewme-fullname">Loading User...</h3>
+        <p style="color:var(--text-muted); font-size:13px;" id="viewme-email">account@identity.net</p>
+        
+        <div class="profile-details-grid">
+          <div class="profile-meta-item">
+            <small>Date of Birth</small>
+            <p id="viewme-dob">Not Declared</p>
+          </div>
+          <div class="profile-meta-item">
+            <small>Contact Number</small>
+            <p id="viewme-phone">Not Assigned</p>
+          </div>
+          <div class="profile-meta-item">
+            <small>Operational Locale</small>
+            <p id="viewme-locale">Global Region</p>
+          </div>
+          <div class="profile-meta-item">
+            <small>Framework Level</small>
+            <p style="color:var(--primary-accent); font-weight:bold;">Premium Client</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card" style="margin-bottom:20px;">
+        <h3>Modify Personal Matrix Details</h3>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px;">Update local account data cached in the global database node cluster.</p>
+        
+        <div class="input-wrapper">
+          <label>Display Full Name</label>
+          <input type="text" id="edit-profile-name" placeholder="Alex Mercer">
+        </div>
+        <div class="input-wrapper">
+          <label>Date of Birth</label>
+          <input type="date" id="edit-profile-dob">
+        </div>
+        <div class="input-wrapper">
+          <label>Secure Telephone Contact</label>
+          <input type="tel" id="edit-profile-phone" placeholder="+91 98765 43210">
+        </div>
+        <div class="input-wrapper">
+          <label>Regional Location Locale</label>
+          <input type="text" id="edit-profile-locale" placeholder="Chennai, India">
+        </div>
+        <button class="btn-primary" onclick="commitProfileViewMeUpdates()">Save Personal Parameters</button>
+      </div>
+
+      <div class="glass-card" style="margin-bottom:20px;">
+        <h3>Access Authentication Matrix Resets</h3>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px;">Request network recovery tokens or update active password access fields instantly.</p>
+        
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <button class="btn-secondary" onclick="triggerSettingsPasswordRecoveryToken()">Dispatch Email Password Reset Token</button>
+          
+          <div style="border-top:1px solid var(--glass-border); padding-top:15px; margin-top:5px;">
+            <div class="input-wrapper">
+              <label>Define New Target Password</label>
+              <input type="password" id="settings-new-password" placeholder="Minimum 6 complex tokens">
+            </div>
+            <button class="btn-primary" style="background:var(--vector-reminder);" onclick="commitDirectPasswordInputModification()">Modify Password Entry String</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card" style="margin-bottom:20px;">
+        <h3>Visual Interface Theme Schemes</h3>
+        <div class="input-wrapper" style="margin-top:10px;">
+          <select id="theme-engine-selector" onchange="applySystemThemeEngineSetting()">
+            <option value="auto">System Sync Adaptive Scheme (Auto)</option>
+            <option value="light">High-Contrast Light Core</option>
+            <option value="dark">Premium Dark Glassmorphism</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="glass-card" style="border: 1px solid rgba(239,68,68,0.2);">
+        <h3>Identity Session Operations</h3>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px;">Invalidate current security context tokens from this local runtime terminal.</p>
+        <button class="btn-primary" style="background:linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); box-shadow:0 4px 12px rgba(239,68,68,0.2);" onclick="executeSignOutGateway()">Disconnect Token Session</button>
+      </div>
+
+    </main>
+
+    <nav class="bottom-dock-nav">
+      <div class="dock-item" onclick="window.location.href='dashboard.html'">Dashboard</div>
+      <div class="dock-item" onclick="window.location.href='dashboard.html?tab=view-calendar'">Calendar</div>
+      <div class="dock-item" onclick="window.location.href='dashboard.html?tab=view-ledger'">Ledger</div>
+      <div class="dock-item active" onclick="location.reload()">Settings</div>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+  
+  <script>
+    // System Lifecycle Initializer Hooks
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        streamSettingsProfileMetadata(user.uid);
+      }
+    });
+
+    function streamSettingsProfileMetadata(uid) {
+      const profileDbReference = rtdb.ref(`money_manager_v35/users/${uid}/profile`);
+      
+      // Wire explicit listener callback loops to run updates onto the ViewMe engine cards
+      profileDbReference.on('value', snap => {
+        const metadata = snap.val() || {};
+        
+        // Populate view parameters onto matching ViewMe interface labels
+        document.getElementById("viewme-fullname").innerText = metadata.name || "Anonymous Client";
+        document.getElementById("viewme-email").innerText = metadata.email || auth.currentUser.email;
+        document.getElementById("viewme-dob").innerText = metadata.dob || "Not Declared";
+        document.getElementById("viewme-phone").innerText = metadata.phone || "Not Assigned";
+        document.getElementById("viewme-locale").innerText = metadata.locale || "Global Region";
+
+        // Assign current data states inside the update input fields to simplify modifications
+        document.getElementById("edit-profile-name").value = metadata.name || "";
+        document.getElementById("edit-profile-dob").value = metadata.dob || "";
+        document.getElementById("edit-profile-phone").value = metadata.phone || "";
+        document.getElementById("edit-profile-locale").value = metadata.locale || "";
+      });
+    }
+
+    function commitProfileViewMeUpdates() {
+      if (!auth.currentUser) return alert("System Session Error: Action dropped due to empty authorization tokens.");
+      
+      const payload = {
+        name: document.getElementById("edit-profile-name").value.trim(),
+        dob: document.getElementById("edit-profile-dob").value,
+        phone: document.getElementById("edit-profile-phone").value.trim(),
+        locale: document.getElementById("edit-profile-locale").value.trim(),
+        email: auth.currentUser.email
+      };
+
+      if (!payload.name) return alert("Validation Guard Refusal: Identity Parameter [Full Name] cannot execute blank.");
+
+      rtdb.ref(`money_manager_v35/users/${auth.currentUser.uid}/profile`).update(payload)
+        .then(() => alert("Profile Vector Changes Synchronized inside Database Cluster."))
+        .catch(err => alert(`Database Refusal: ${err.message}`));
+    }
+
+    function triggerSettingsPasswordRecoveryToken() {
+      if (!auth.currentUser) return;
+      auth.sendPasswordResetEmail(auth.currentUser.email)
+        .then(() => alert("Network Token Routed. Access your external email box sequence to update your secret keys."))
+        .catch(err => alert(err.message));
+    }
+
+    function commitDirectPasswordInputModification() {
+      const targetStr = document.getElementById("settings-new-password").value;
+      if (!targetStr || targetStr.length < 6) return alert("Security Violation: Chosen complexity fails string standard bounds (< 6 characters).");
+
+      auth.currentUser.updatePassword(targetStr)
+        .then(() => {
+          alert("Security Authentication Access Password Modified in Live Environment.");
+          document.getElementById("settings-new-password").value = "";
+        })
+        .catch(err => alert(`Identity Gateway Engine Exception: ${err.message}`));
+    }
+  </script>
+</body>
+</html>

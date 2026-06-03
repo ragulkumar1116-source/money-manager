@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Manager Pro v3.5 - Authentication</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body class="auth-body">
+  <div class="glass-card auth-card">
+    <div class="auth-header">
+      <h2>Money Manager Pro</h2>
+      <p id="auth-subtitle">Sign in to manage your premium asset logs</p>
+    </div>
+
+    <div id="login-form-group">
+      <div class="input-wrapper">
+        <label>Email Address</label>
+        <input type="email" id="auth-email" placeholder="name@domain.com">
+      </div>
+      <div class="input-wrapper">
+        <label>Password</label>
+        <input type="password" id="auth-password" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" id="btn-login">Secure Login</button>
+      <div class="auth-actions">
+        <span onclick="toggleAuthMode('register')">Create Premium Account</span>
+        <span onclick="forgotPassword()">Forgot Password?</span>
+      </div>
+    </div>
+
+    <div id="register-form-group" style="display:none;">
+      <div class="input-wrapper">
+        <label>Full Name</label>
+        <input type="text" id="reg-name" placeholder="Alex Mercer">
+      </div>
+      <div class="input-wrapper">
+        <label>Email Address</label>
+        <input type="email" id="reg-email" placeholder="name@domain.com">
+      </div>
+      <div class="input-wrapper">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="Minimum 6 characters">
+      </div>
+      <button class="btn-primary" id="btn-register">Register System Identity</button>
+      <div class="auth-actions">
+        <span onclick="toggleAuthMode('login')">Back to Login Gateway</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
