@@ -331,3 +331,222 @@ button.btn-secondary:hover { background: rgba(0,0,0,0.03); }
   
   .main-scroll-view { grid-column: 2 / 3; grid-row: 2 / 3; padding: 32px; padding-bottom: 32px; }
 }
+
+
+
+
+/* =========================
+   HEADER
+========================= */
+.glass-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:12px 15px;
+}
+
+.user-profile-summary{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.alert-center-badge{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.btn-logout-gateway{
+    white-space:nowrap;
+}
+
+/* =========================
+   FLOATING ACTION BUTTON
+========================= */
+.fab-trigger-action{
+    position:fixed;
+    right:20px;
+    bottom:85px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:var(--accent-gradient);
+    color:#fff;
+    font-size:32px;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(67,97,238,.4);
+    z-index:999;
+    transition:.2s;
+}
+
+.fab-trigger-action:active{
+    transform:scale(.95);
+}
+
+/* =========================
+   METRICS CARDS
+========================= */
+.metrics-scroller{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.metric-card{
+    width:100%;
+}
+
+/* =========================
+   CHARTS
+========================= */
+.chart-flexbox{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.chart-container{
+    width:100%;
+    overflow:hidden;
+}
+
+/* =========================
+   CALENDAR
+========================= */
+.calendar-days-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+}
+
+.calendar-days-grid div{
+    min-height:50px;
+}
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+.bottom-dock-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    z-index:900;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width:768px){
+
+    .glass-header{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .user-profile-summary h4{
+        font-size:14px;
+    }
+
+    .alert-center-badge{
+        font-size:14px;
+    }
+
+    .btn-logout-gateway{
+        padding:6px 12px !important;
+        font-size:12px !important;
+    }
+
+    .metrics-scroller{
+        grid-template-columns:1fr;
+    }
+
+    .chart-flexbox{
+        grid-template-columns:1fr;
+    }
+
+    .filter-search-row{
+        flex-direction:column;
+    }
+
+    .filter-search-row input,
+    .filter-search-row select{
+        width:100%;
+    }
+
+    .export-actions{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .export-actions button{
+        width:100%;
+    }
+
+    .modal-window{
+        width:95%;
+        max-height:90vh;
+        overflow-y:auto;
+    }
+
+    .calendar-days-grid div{
+        min-height:40px;
+        font-size:12px;
+    }
+
+    .fab-trigger-action{
+        width:55px;
+        height:55px;
+        font-size:28px;
+        right:15px;
+        bottom:80px;
+    }
+
+    .bottom-dock-nav{
+        height:65px;
+    }
+
+    .dock-item{
+        font-size:12px;
+    }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+@media (max-width:480px){
+
+    .user-profile-summary{
+        gap:6px;
+    }
+
+    .avatar-icon{
+        font-size:20px;
+    }
+
+    #user-display-name{
+        font-size:13px;
+    }
+
+    .metric-card h2{
+        font-size:22px;
+    }
+
+    .metric-card h3{
+        font-size:18px;
+    }
+
+    .fab-trigger-action{
+        width:50px;
+        height:50px;
+        font-size:24px;
+    }
+}
